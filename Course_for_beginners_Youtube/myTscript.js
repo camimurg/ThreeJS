@@ -26,3 +26,6 @@ window.addEventListener('resize', () => {
   // everytime we have an adjustment on the camera we have to call update Project Matrix function
   camera.updateProjectMatrix();
 })
+
+// in order to have the background colour set up we need to render it in the renderer with the method render
+renderer.render(scene, camera);
