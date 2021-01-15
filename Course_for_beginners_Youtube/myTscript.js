@@ -22,25 +22,39 @@ document.body.appendChild(renderer.domElement);
 
 // readjusting the window screen
 window.addEventListener('resize', () => {
-  renderer.setSize(window.innerWidth,window.innerHeight);
+  renderer.setSize(window.innerWidth, window.innerHeight);
   camera.aspect = window.innerWidth / window.innerHeight;
   // everytime we have an adjustment on the camera we have to call update Project Matrix function
   camera.updateProjectionMatrix();
-})
-
+});
 
 // Defining the geometry on our 3D element
-const geometry = new THREE.SphereGeometry(1,10,10); // SphereGeometry(radius : Float, widthSegments : Integer, heightSegments : Integer
-// creating the material
-const material = new THREE.MeshBasicMaterial( {color: 0xffcc00} );
+const geometry = new THREE.BoxGeometry(1, 1, 1); // SphereGeometry(radius : Float, widthSegments : Integer, heightSegments : Integer
+// Creating the material
+const material = new THREE.MeshLambertMaterial( {color: 0xffcc00} );
 const mesh = new THREE.Mesh(geometry, material);
+
+mesh.position.set(2, 2, -2) // is the same as:
+// mesh.position.x = 2;
+// mesh.position.y = 2;
+// mesh.position.z = -2;
+mesh.rotation.set(45, 0, 0)
 
 // We add our sphere that we've created above into our scene:
 scene.add(mesh);
 
-// In order to have the background colour set up, and also the position of the camera, we need to render it in the renderer with the method render
-renderer.render(scene, camera);
+// Adding light to our sphere
+const light = new THREE.PointLight(0xFFFFFF, 1, 500);
+light.position.set(10,0,25);
+scene.add(light);
 
+// Creating a function where we set the animation property so that the object stay the same if we resize the window and ... in order to have the background colour set up, and also the position of the camera, we need to render it in the renderer with the method render
+const render = function() {
+  requestAnimationFrame(render);
+  renderer.render(scene, camera);
+};
+
+render();
 
 
 
