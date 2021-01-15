@@ -19,3 +19,10 @@ renderer.setSize(window.innerWidth,window.innerHeight); // set the size of the r
 // now we need to append child the renderer DOM element. In a fancy way: I create our canvas element with the renderer settings
 document.body.appendChild(renderer.domElement);
 
+// readjusting the window screen
+window.addEventListener('resize', () => {
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  // everytime we have an adjustment on the camera we have to call update Project Matrix function
+  camera.updateProjectMatrix();
+})
