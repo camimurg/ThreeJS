@@ -10,6 +10,7 @@ const camera = new THREE.PerspectiveCamera(
    0.1, // near and far plane
   1000 // ???
   );
+camera.position.z = 5; // in order to display our sphere
 
 // 3. RENDERER (WebGL, CSS 2d, CSS 3d, SVG)
 const renderer = new THREE.WebGLRenderer({antialias: true}); // otherwise the result will look jagged
@@ -24,17 +25,21 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth,window.innerHeight);
   camera.aspect = window.innerWidth / window.innerHeight;
   // everytime we have an adjustment on the camera we have to call update Project Matrix function
-  camera.updateProjectMatrix();
+  camera.updateProjectionMatrix();
 })
 
-// in order to have the background colour set up we need to render it in the renderer with the method render
+
+// Defining the geometry on our 3D element
+const geometry = new THREE.SphereGeometry(1,10,10); // SphereGeometry(radius : Float, widthSegments : Integer, heightSegments : Integer
+// creating the material
+const material = new THREE.MeshBasicMaterial( {color: 0xffcc00} );
+const mesh = new THREE.Mesh(geometry, material);
+
+// We add our sphere that we've created above into our scene:
+scene.add(mesh);
+
+// In order to have the background colour set up, and also the position of the camera, we need to render it in the renderer with the method render
 renderer.render(scene, camera);
-
-// defining the geometry on our 3D element
-const geometry =
-
-
-
 
 
 
