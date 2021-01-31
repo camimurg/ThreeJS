@@ -63,6 +63,8 @@ function createParticleSystem() {
   particleSystem = new THREE.Points(particles, particleMaterial);
   return particleSystem;
 }
+particleSystem = createParticleSystem();
+ scene.add(particleSystem);
 //-------------------------------------------------//
 
 function animate() {
